@@ -120,7 +120,7 @@ class ActiveRecord::Base
     #  # Example using column_names and array_of_values
     #  columns = [ :author_name, :title ]
     #  values = [ [ 'zdennis', 'test post' ], [ 'jdoe', 'another test post' ] ]
-    #  BlogPost.import columns, values 
+    #  BlogPost.import columns, values
     #
     #  # Example using column_names, array_of_value and options
     #  columns = [ :author_name, :title ]
@@ -142,7 +142,7 @@ class ActiveRecord::Base
     #
     # == On Duplicate Key Update (MySQL only)
     #
-    # The :on_duplicate_key_update option can be either an Array or a Hash. 
+    # The :on_duplicate_key_update option can be either an Array or a Hash.
     #
     # ==== Using an Array
     #
@@ -348,8 +348,7 @@ class ActiveRecord::Base
         if self.column_names.include?(key)
           value = blk.call
           if index=column_names.index(key)
-             # replace every instance of the array of attributes with our value
-             array_of_attributes.each{ |arr| arr[index] = value }
+             array_of_attributes.each{ |arr| arr[index] ||= value }
           else
             column_names << key
             array_of_attributes.each { |arr| arr << value }
@@ -361,8 +360,7 @@ class ActiveRecord::Base
         if self.column_names.include?(key)
           value = blk.call
           if index=column_names.index(key)
-             # replace every instance of the array of attributes with our value
-             array_of_attributes.each{ |arr| arr[index] = value }
+             array_of_attributes.each{ |arr| arr[index] ||= value }
           else
             column_names << key
             array_of_attributes.each { |arr| arr << value }
